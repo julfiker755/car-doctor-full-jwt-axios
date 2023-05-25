@@ -18,14 +18,14 @@ const Login = () => {
   const location=useLocation()
   const navigate=useNavigate()
   let from = location.state?.from?.pathname || "/";
-   const loginuser={
-      user:user?.email
-   }
-
-
+ 
+  
   const handlefrom=async(e)=>{
     e.preventDefault()
     const success=await signInWithEmailAndPassword(email,pass)
+    const loginuser={
+      user:success.user?.email
+   }
     if(success){
       const {data}=await axios.post('http://localhost:5050/jwt',loginuser)
       localStorage.setItem('assentoken',JSON.stringify(data))
@@ -34,6 +34,9 @@ const Login = () => {
     
     
   }
+  
+  
+  
     return (
         <div className="hero max-w-7xl mx-auto">
         <div className="flex items-center my-[60px] gap-[130px]">
